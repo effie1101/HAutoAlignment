@@ -317,8 +317,8 @@ namespace FC.MarkLocator
                 //HOperatorSet.SetColor(hv_ExpDefaultWinHandle, "green");
                 //HOperatorSet.DispObj(ho_ResultContours, hv_ExpDefaultWinHandle);
 
-                HOperatorSet.AngleLx(hv_UsedRow.TupleSelect(1), hv_UsedColumn.TupleSelect(
-                    1), hv_UsedRow.TupleSelect(6), hv_UsedColumn.TupleSelect(6), out hv_Angle);
+                HOperatorSet.AngleLx(hv_UsedRow.TupleSelect(0), hv_UsedColumn.TupleSelect(
+                    0), hv_UsedRow.TupleSelect(hv_UsedRow.Length-1), hv_UsedColumn.TupleSelect(hv_UsedColumn.Length-1), out hv_Angle);
                 HOperatorSet.TupleDeg(hv_Angle, out hv_Degree);
                 //disp_message(hv_ExpDefaultWinHandle, "定位成功！", "window", 12, 12, "black",
                 //    "true");

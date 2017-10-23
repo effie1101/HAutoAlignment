@@ -56,15 +56,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="HReference\Model.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="license.dat">
+    <None Include="HReference\license.dat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
