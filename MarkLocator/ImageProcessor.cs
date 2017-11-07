@@ -8,8 +8,8 @@ namespace FC.MarkLocator
 {
     public class ProcessImage
     {
-        const double CCD_W = 4.8;
-        const double CCD_H = 3.6;
+        const double CCD_W = 20;
+        const double CCD_H = 15;
         const int IMG_WIDTH = 1292;
         const int IMG_HEIGHT = 964;
         string logPath = string.Empty;
@@ -43,7 +43,10 @@ namespace FC.MarkLocator
             //计算相对位移
             this.OutputManager.AlignmentSita = Math.Round(angle + this.InputManager.CCD2ProbeSita, 2);
             this.OutputManager.AlignmentX = Math.Round(0 - this.InputManager.ProbeHeadRotateR * Math.Sin(this.OutputManager.AlignmentSita / 180 * Math.PI) + this.InputManager.CCD2ProbeX + (col / IMG_WIDTH * CCD_W - CCD_W / 2) + this.InputManager.BondpadCenterX, 2);
-            this.OutputManager.AlignmentY = Math.Round(this.InputManager.ProbeHeadRotateR * (1 - Math.Cos(this.OutputManager.AlignmentSita / 180 * Math.PI)) + this.InputManager.CCD2ProbeY + (row / IMG_HEIGHT* CCD_H - CCD_H / 2) + this.InputManager.BondpadCenterY, 2);
+            this.OutputManager.AlignmentY = Math.Round(this.InputManager.ProbeHeadRotateR * (1 - Math.Cos(this.OutputManager.AlignmentSita / 180 * Math.PI)) + this.InputManager.CCD2ProbeY + (row / IMG_HEIGHT * CCD_H - CCD_H / 2) + this.InputManager.BondpadCenterY, 2);
+
+            //this.OutputManager.AlignmentX = Math.Round(this.InputManager.BondpadCenterX - this.InputManager.CCD2ProbeX - (col / IMG_WIDTH * CCD_W - CCD_W / 2) - this.InputManager.CCD2ProbeX - this.InputManager.ProbeHeadRotateR * Math.Sin(this.OutputManager.AlignmentSita / 180 * Math.PI),2);
+            //this.OutputManager.AlignmentX = Math.Round(this.InputManager.BondpadCenterY - this.InputManager.CCD2ProbeY - (row / IMG_HEIGHT * CCD_H - CCD_H / 2) - this.InputManager.CCD2ProbeY - this.InputManager.ProbeHeadRotateR * (1 - Math.Cos(this.OutputManager.AlignmentSita / 180 * Math.PI)), 2);
 
             return result;
         }

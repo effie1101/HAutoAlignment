@@ -219,7 +219,7 @@ namespace FC.MarkLocator
             ho_Image.Dispose();
             HOperatorSet.ReadImage(out ho_Image, FileName);
             HOperatorSet.FindShapeModel(ho_Image, hv_ModelID, (new HTuple(-10)).TupleRad()
-                , (new HTuple(20)).TupleRad(), 0.3, 1, 0.5, "least_squares", 0, 0.75, out hv_RowFound,
+                , (new HTuple(20)).TupleRad(), 0.5, 1, 0.5, "least_squares", 0, 0.75, out hv_RowFound,
                 out hv_ColFound, out hv_AngleFound, out hv_ScoreFound);
             if ((int)(new HTuple((new HTuple(1)).TupleEqual(new HTuple(hv_RowFound.TupleLength()
                 )))) != 0)

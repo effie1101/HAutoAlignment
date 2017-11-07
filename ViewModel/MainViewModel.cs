@@ -32,7 +32,7 @@ namespace HAutoAlignment.ViewModel
             this.InputManager.BondpadCenterX = 11.4;
             this.InputManager.BondpadCenterY = -0.2;
             this.InputManager.CCD2ProbeX = 0;
-            this.InputManager.CCD2ProbeY = 54.5;
+            this.InputManager.CCD2ProbeY =54.5;
             this.InputManager.CCD2ProbeSita = 0;
 
             this.InputManager.ProbeHeadRotateR = 37.5;
