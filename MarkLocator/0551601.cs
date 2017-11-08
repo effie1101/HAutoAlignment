@@ -118,7 +118,7 @@ namespace FC.MarkLocator
             HTuple hv_HomMat2D = null;
             HTuple hv_Line = null, hv_LineIndices = null, hv_Row = null, hv_Column = null;
 
-         // Initialize local and output iconic variables 
+                    // Initialize local and output iconic variables 
             HOperatorSet.GenEmptyObj(out ho_Image);
             HOperatorSet.GenEmptyObj(out ho_Rectangle);
             HOperatorSet.GenEmptyObj(out ho_ImageReduced);
@@ -210,6 +210,10 @@ namespace FC.MarkLocator
             HTuple hv_UsedColumn = new HTuple(), hv_UsedRow = new HTuple();
             HTuple hv_Angle = new HTuple(), hv_Degree = new HTuple();
 
+            HTuple hv_RowBegin = new HTuple(), hv_ColBegin = new HTuple(), hv_RowEnd = new HTuple();
+            HTuple hv_ColEnd = new HTuple(), hv_Nr = new HTuple();
+            HTuple hv_Nc = new HTuple(), hv_Dist = new HTuple();
+
             HOperatorSet.GenEmptyObj(out ho_Image);
             HOperatorSet.GenEmptyObj(out ho_ResultContours);
             HOperatorSet.GenEmptyObj(out ho_Contour);
@@ -255,7 +259,11 @@ namespace FC.MarkLocator
                 ho_ResultContours.Dispose();
                 HOperatorSet.GetMetrologyObjectResultContour(out ho_ResultContours, hv_MetrologyHandle,
                     "all", "all", 1.5);
-                
+
+                HOperatorSet.FitLineContourXld(ho_ResultContours, "tukey", -1, 0, 5, 2, out hv_RowBegin,
+    out hv_ColBegin, out hv_RowEnd, out hv_ColEnd, out hv_Nr, out hv_Nc,
+    out hv_Dist);
+
                 ho_Cross.Dispose();
                 HOperatorSet.GenCrossContourXld(out ho_Cross, hv_RowFound, hv_ColFound, 40,
                     hv_AngleFound);
@@ -281,8 +289,9 @@ namespace FC.MarkLocator
 
                 centerRow = hv_RowFound;
                 centerCol = hv_ColFound;
-                // angle = hv_Degree;
-                angle = 0;
+                //angle= hv_Degree;
+                angle = Math.Atan(hv_Nr / hv_Nc); 
+                //angle = 0;
                 result = true;
             }
             else
