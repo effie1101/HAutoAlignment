@@ -260,9 +260,7 @@ namespace FC.MarkLocator
                 HOperatorSet.GetMetrologyObjectResultContour(out ho_ResultContours, hv_MetrologyHandle,
                     "all", "all", 1.5);
 
-                HOperatorSet.FitLineContourXld(ho_ResultContours, "tukey", -1, 0, 5, 2, out hv_RowBegin,
-    out hv_ColBegin, out hv_RowEnd, out hv_ColEnd, out hv_Nr, out hv_Nc,
-    out hv_Dist);
+                HOperatorSet.FitLineContourXld(ho_ResultContours, "tukey", -1, 0, 5, 2, out hv_RowBegin, out hv_ColBegin, out hv_RowEnd, out hv_ColEnd, out hv_Nr, out hv_Nc,out hv_Dist);
 
                 ho_Cross.Dispose();
                 HOperatorSet.GenCrossContourXld(out ho_Cross, hv_RowFound, hv_ColFound, 40,
@@ -279,7 +277,6 @@ namespace FC.MarkLocator
                 //disp_message(hv_ExpDefaultWinHandle, "定位成功！", "window", 12, 12, "black",
                 //    "true");
 
-
                 disp_message(hv_ExpDefaultWinHandle, ((((((new HTuple("mark位置：") + "[ ") + hv_RowFound) + new HTuple(",")) + hv_ColFound) + new HTuple(",")) + hv_Degree) + "° ]",
                       "window", 32, 12, "black", "true");
                 //相对模板角度
@@ -290,7 +287,9 @@ namespace FC.MarkLocator
                 centerRow = hv_RowFound;
                 centerCol = hv_ColFound;
                 //angle= hv_Degree;
-                angle = Math.Atan(hv_Nr / hv_Nc); 
+
+                angle = Math.Atan((hv_RowEnd - hv_RowBegin) / (hv_ColEnd - hv_ColBegin));
+
                 //angle = 0;
                 result = true;
             }
