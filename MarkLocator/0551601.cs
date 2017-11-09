@@ -137,7 +137,7 @@ namespace FC.MarkLocator
 
             //创建模板
             ho_Rectangle.Dispose();
-            HOperatorSet.GenRectangle1(out ho_Rectangle, 400, 570, 550, 700);
+            HOperatorSet.GenRectangle1(out ho_Rectangle, 360, 660, 450, 780);
             ho_ImageReduced.Dispose();
             HOperatorSet.ReduceDomain(ho_Image, ho_Rectangle, out ho_ImageReduced);
             HOperatorSet.AreaCenter(ho_ImageReduced, out hv_Area, out hv_RowRefer, out hv_ColRefer);
@@ -242,55 +242,31 @@ namespace FC.MarkLocator
 
                 HOperatorSet.AlignMetrologyModel(hv_MetrologyHandle, hv_RowFound, hv_ColFound,
                     hv_AngleFound);
-                //应用测量
-                HOperatorSet.ApplyMetrologyModel(ho_Image, hv_MetrologyHandle);
-                //获取结果
-                ho_Contour.Dispose();
-                HOperatorSet.GetMetrologyObjectMeasures(out ho_Contour, hv_MetrologyHandle,
-                    "all", "all", out hv_Row, out hv_Column);
-
-                HOperatorSet.GetMetrologyObjectResult(hv_MetrologyHandle, "all", "all", "used_edges",
-                    "row", out hv_UsedRow);
-                HOperatorSet.GetMetrologyObjectResult(hv_MetrologyHandle, "all", "all", "used_edges",
-                    "column", out hv_UsedColumn);
-                ho_UsedEdges.Dispose();
-                HOperatorSet.GenCrossContourXld(out ho_UsedEdges, hv_UsedRow, hv_UsedColumn,
-                    10, (new HTuple(45)).TupleRad());
-                ho_ResultContours.Dispose();
-                HOperatorSet.GetMetrologyObjectResultContour(out ho_ResultContours, hv_MetrologyHandle,
-                    "all", "all", 1.5);
-
-                HOperatorSet.FitLineContourXld(ho_ResultContours, "tukey", -1, 0, 5, 2, out hv_RowBegin, out hv_ColBegin, out hv_RowEnd, out hv_ColEnd, out hv_Nr, out hv_Nc,out hv_Dist);
 
                 ho_Cross.Dispose();
                 HOperatorSet.GenCrossContourXld(out ho_Cross, hv_RowFound, hv_ColFound, 40,
                     hv_AngleFound);
-                //HOperatorSet.DispObj(ho_Image, hv_ExpDefaultWinHandle);
-                //HOperatorSet.SetColor(hv_ExpDefaultWinHandle, "green");
-                //HOperatorSet.DispObj(ho_Cross, hv_ExpDefaultWinHandle);
-                //HOperatorSet.SetColor(hv_ExpDefaultWinHandle, "green");
-                //HOperatorSet.DispObj(ho_ResultContours, hv_ExpDefaultWinHandle);
 
-                HOperatorSet.AngleLx(hv_UsedRow.TupleSelect(0), hv_UsedColumn.TupleSelect(
-                    0), hv_UsedRow.TupleSelect(hv_UsedRow.Length-1), hv_UsedColumn.TupleSelect(hv_UsedColumn.Length-1), out hv_Angle);
-                HOperatorSet.TupleDeg(hv_Angle, out hv_Degree);
+
+                //HOperatorSet.AngleLx(hv_UsedRow.TupleSelect(0), hv_UsedColumn.TupleSelect(0), hv_UsedRow.TupleSelect(hv_UsedRow.Length-1), hv_UsedColumn.TupleSelect(hv_UsedColumn.Length-1), out hv_Angle);
+                //HOperatorSet.TupleDeg(hv_Angle, out hv_Degree);
                 //disp_message(hv_ExpDefaultWinHandle, "定位成功！", "window", 12, 12, "black",
                 //    "true");
 
-                disp_message(hv_ExpDefaultWinHandle, ((((((new HTuple("mark位置：") + "[ ") + hv_RowFound) + new HTuple(",")) + hv_ColFound) + new HTuple(",")) + hv_Degree) + "° ]",
-                      "window", 32, 12, "black", "true");
                 //相对模板角度
-                //HOperatorSet.TupleDeg(hv_AngleFound, out hv_Degree);
-                //disp_message(hv_ExpDefaultWinHandle, ("相对模板角度为" + hv_Degree) + "°", "window",
-                //    52, 12, "black", "true"); 
+                HOperatorSet.TupleDeg(hv_AngleFound, out hv_Degree);
+                disp_message(hv_ExpDefaultWinHandle, ("相对模板角度为" + hv_Degree) + "°", "window",
+                    52, 12, "black", "true");
 
                 centerRow = hv_RowFound;
                 centerCol = hv_ColFound;
-                //angle= hv_Degree;
-
-                angle = Math.Atan((hv_RowEnd - hv_RowBegin) / (hv_ColEnd - hv_ColBegin));
+                angle= hv_Degree;
 
                 //angle = 0;
+
+                disp_message(hv_ExpDefaultWinHandle, ((((((new HTuple("mark位置：") + "[ ") + hv_RowFound) + new HTuple(",")) + hv_ColFound) + new HTuple(",")) + angle) + "° ]",
+      "window", 32, 12, "black", "true");
+
                 result = true;
             }
             else
